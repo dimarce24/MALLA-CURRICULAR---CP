@@ -1,0 +1,57 @@
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f2f2f2;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.semestre {
+  flex: 0 0 auto;
+  background: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  min-width: 200px;
+}
+
+.semestre h3 {
+  text-align: center;
+  color: #444;
+}
+
+.materia {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+  padding: 10px;
+  background: #b3e5fc;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  color: #000;
+  font-weight: bold;
+}
+
+.materia:disabled {
+  background: #ccc;
+  color: #777;
+  cursor: not-allowed;
+}
+
+.materia.activo {
+  background: #0288d1;
+  color: white;
+}
