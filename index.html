@@ -1,36 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
   <title>Malla Curricular Interactiva</title>
-  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Malla Curricular - CP</h2>
-  <div id="network" style="width: 100%; height: 700px; border: 1px solid lightgray;"></div>
+  <h1>Malla Curricular – CP</h1>
+  <div class="container">
+    <!-- MATERIAS POR SEMESTRE -->
+    <div class="semestre"><h3>Semestre 1</h3>
+<button class="materia" id="MATEMÁTICA_I" data-prereq="" >MATEMÁTICA I</button>
+<button class="materia" id="FUNDAMENTOS_DE_DERECHO" data-prereq="" >FUNDAMENTOS DE DERECHO</button>
+<button class="materia" id="CULTURA_Y_DEPORTE" data-prereq="" >CULTURA Y DEPORTE</button>
+<button class="materia" id="COMUNICACIÓN_ORAL_Y_ESCRITA" data-prereq="" >COMUNICACIÓN ORAL Y ESCRITA</button>
+<button class="materia" id="PROYECTO_DE_VIDA" data-prereq="" >PROYECTO DE VIDA</button>
+<button class="materia" id="CONTABILIDAD_I" data-prereq="" >CONTABILIDAD I</button>
+<button class="materia" id="SISTEMAS_DE_INFORMACIÓN_I" data-prereq="" >SISTEMAS DE INFORMACIÓN I</button>
+</div>
+<div class="semestre"><h3>Semestre 2</h3>
+<button class="materia" id="MATEMÁTICA_II" data-prereq="MATEMÁTICA_I" disabled>MATEMÁTICA II</button>
+<button class="materia" id="LEGISLACIÓN_COMERCIAL" data-prereq="FUNDAMENTOS_DE_DERECHO" disabled>LEGISLACIÓN COMERCIAL</button>
+<button class="materia" id="ECONOMÍA_I" data-prereq="" >ECONOMÍA I</button>
+<button class="materia" id="FUNDAMENTOS_DE_ADMINISTRACIÓN" data-prereq="" >FUNDAMENTOS DE ADMINISTRACIÓN</button>
+<button class="materia" id="EPISTEMOLOGÍA_DE_LA_INVESTIGACIÓN_CONTABLE" data-prereq="" >EPISTEMOLOGÍA DE LA INVESTIGACIÓN CONTABLE</button>
+</div>
+    <!-- Puedes agregar más semestres si deseas -->
+  </div>
 
-  <script src="materias.js"></script>
   <script>
-    var container = document.getElementById('network');
-    var options = {
-      nodes: {
-        shape: 'box',
-        margin: 10,
-        font: { size: 14 }
-      },
-      edges: {
-        arrows: 'to',
-        smooth: { type: 'cubicBezier', forceDirection: 'vertical', roundness: 0.4 }
-      },
-      layout: {
-        hierarchical: {
-          direction: "UD",
-          sortMethod: "hubsize"
-        }
-      },
-      physics: false
-    };
-    var network = new vis.Network(container, data, options);
+    // Lógica para activar materias según prerrequisitos
+    document.querySelectorAll('.materia').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('activo');
+        const id = btn.id;
+        document.querySelectorAll('.materia').forEach(target => {
+          const prereq = target.dataset.prereq?.split(',').filter(x => x);
+          if (prereq.length > 0) {
+            const allMet = prereq.every(req => document.getElementById(req)?.classList.contains('activo'));
+            if (allMet) target.disabled = false;
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>
