@@ -1,0 +1,14 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 20px;
+  background-color: #f8f8f8;
+}
+
+h2 {
+  text-align: center;
+  color: #444;
+}
+
+#network {
+  background-color: #ffffff;
+}
